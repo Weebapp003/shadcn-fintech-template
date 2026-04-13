@@ -107,7 +107,7 @@ export function AccountCards() {
   }
 
   return (
-    <Card className="col-span-full lg:col-span-4">
+    <Card>
       <CardContent className="flex flex-col gap-5 pt-6">
         <AnimatePresence mode="wait">
           {addState === "idle" ? (

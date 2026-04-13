@@ -8,12 +8,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { FinancialOverview } from "@/components/dashboard/financial-overview"
-import { AccountCards } from "@/components/dashboard/account-cards"
-import { QuickTransfer } from "@/components/dashboard/quick-transfer"
-import { SpendingLimit } from "@/components/dashboard/spending-limit"
-import { MoneyMovement } from "@/components/dashboard/money-movement"
-import { RecentTransactions } from "@/components/dashboard/recent-transactions"
+import { DashboardCustomizer } from "@/components/dashboard/dashboard-customizer"
 
 export default function Page() {
   return (
@@ -39,18 +34,7 @@ export default function Page() {
         </div>
       </header>
 
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid gap-4 lg:grid-cols-12">
-          <FinancialOverview />
-          <AccountCards />
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <QuickTransfer />
-          <SpendingLimit />
-          <MoneyMovement />
-        </div>
-        <RecentTransactions />
-      </div>
+      <DashboardCustomizer />
     </>
   )
 }

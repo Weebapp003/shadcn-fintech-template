@@ -153,7 +153,7 @@ export const recentTransactions: Transaction[] = [
     transactionId: "INV_918263",
     amount: -120.0,
     date: "Apr 09, 2026",
-    logo: logo("aws.amazon.com"),
+    logo: "/logos/aws-amazon-com.svg",
     category: "Technology",
   },
   {
@@ -288,7 +288,7 @@ export type FullTransaction = {
 
 export const fullTransactions: FullTransaction[] = [
   { id: "t1", merchant: "Spotify", transactionId: "INV_920076", amount: -9.99, date: "Apr 10, 2026", logo: logo("spotify.com"), category: "Entertainment", status: "completed", type: "expense", merchantInfo: "Spotify AB, Stockholm, SE", cardLast4: "4589" },
-  { id: "t2", merchant: "AWS Cloud Services", transactionId: "INV_918263", amount: -120.00, date: "Apr 09, 2026", logo: logo("aws.amazon.com"), category: "Technology", status: "completed", type: "expense", merchantInfo: "Amazon Web Services, Seattle, WA", cardLast4: "4589" },
+  { id: "t2", merchant: "AWS Cloud Services", transactionId: "INV_918263", amount: -120.00, date: "Apr 09, 2026", logo: "/logos/aws-amazon-com.svg", category: "Technology", status: "completed", type: "expense", merchantInfo: "Amazon Web Services, Seattle, WA", cardLast4: "4589" },
   { id: "t3", merchant: "Stripe Payout", transactionId: "TXN_847291", amount: 4250.00, date: "Apr 08, 2026", logo: logo("stripe.com"), category: "Income", status: "completed", type: "income", merchantInfo: "Stripe Inc, San Francisco, CA" },
   { id: "t4", merchant: "Figma Pro", transactionId: "INV_773920", amount: -15.00, date: "Apr 07, 2026", logo: logo("figma.com"), category: "Design", status: "completed", type: "expense", merchantInfo: "Figma Inc, San Francisco, CA", cardLast4: "7321" },
   { id: "t5", merchant: "ChatGPT Plus", transactionId: "INV_920077", amount: -20.00, date: "Apr 06, 2026", logo: logo("openai.com"), category: "AI Tools", status: "completed", type: "expense", merchantInfo: "OpenAI LLC, San Francisco, CA", cardLast4: "4589" },
@@ -465,7 +465,7 @@ export const recurringCharges: RecurringCharge[] = [
   { id: "r3", merchant: "ChatGPT Plus", logo: logo("openai.com"), amount: 20.00, frequency: "monthly", nextDate: "May 06, 2026", status: "wanted", category: "AI Tools" },
   { id: "r4", merchant: "Figma Pro", logo: logo("figma.com"), amount: 15.00, frequency: "monthly", nextDate: "May 07, 2026", status: "wanted", category: "Design" },
   { id: "r5", merchant: "Adobe CC", logo: logo("adobe.com"), amount: 54.99, frequency: "monthly", nextDate: "Apr 29, 2026", status: "review", category: "Design" },
-  { id: "r6", merchant: "AWS", logo: logo("aws.amazon.com"), amount: 120.00, frequency: "monthly", nextDate: "May 09, 2026", status: "wanted", category: "Technology" },
+  { id: "r6", merchant: "AWS", logo: "/logos/aws-amazon-com.svg", amount: 120.00, frequency: "monthly", nextDate: "May 09, 2026", status: "wanted", category: "Technology" },
   { id: "r7", merchant: "Google Workspace", logo: logo("google.com"), amount: 12.00, frequency: "monthly", nextDate: "May 05, 2026", status: "wanted", category: "Productivity" },
   { id: "r8", merchant: "Slack", logo: logo("slack.com"), amount: 8.75, frequency: "monthly", nextDate: "Apr 28, 2026", status: "review", category: "Productivity" },
   { id: "r9", merchant: "GitHub Pro", logo: logo("github.com"), amount: 4.00, frequency: "monthly", nextDate: "Apr 27, 2026", status: "wanted", category: "Technology" },

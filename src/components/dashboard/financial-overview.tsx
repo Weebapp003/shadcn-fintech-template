@@ -82,7 +82,7 @@ export function FinancialOverview() {
   }, [filteredData])
 
   return (
-    <Card className="col-span-full lg:col-span-8">
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="space-y-1">
           <CardTitle className="text-base font-semibold">
