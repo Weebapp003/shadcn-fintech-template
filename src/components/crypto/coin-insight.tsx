@@ -1,7 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Cell,
+  CartesianGrid,
+  ReferenceLine,
+} from "recharts"
 import { ArrowRightIcon } from "lucide-react"
 import { motion, AnimatePresence } from "motion/react"
 import {
@@ -14,75 +22,145 @@ import {
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { cryptoCoins, cryptoPriceHistory } from "@/data/seed"
+import { cryptoCoins } from "@/data/seed"
 import type { CryptoPrices } from "./crypto-page-client"
 
-/* ── chart data builder ────────────────────────────────────────────────── */
+/* ── candlestick data generator ───────────────────────────────────────── */
 
-function buildChartData(coinId: string, period: string, livePrice: number) {
-  const coin = cryptoCoins.find((c) => c.id === coinId)
-  if (!coin) return []
+interface CandlestickData {
+  date: string
+  openClose: [number, number]
+  high: number
+  low: number
+}
 
-  const sparkline = coin.sparklineData
+function generateCandlestickData(basePrice: number, count: number): CandlestickData[] {
+  const data: CandlestickData[] = []
+  let price = basePrice * 0.92
+  const now = new Date()
 
-  // Different slice sizes simulate period filtering
-  let sliceCount: number
-  switch (period) {
-    case "1D": sliceCount = sparkline.length; break
-    case "1W": sliceCount = Math.min(7, sparkline.length); break
-    case "1M": sliceCount = sparkline.length; break
-    case "3M": sliceCount = sparkline.length; break
-    case "1Y": sliceCount = sparkline.length; break
-    case "ALL": sliceCount = sparkline.length; break
-    default: sliceCount = sparkline.length
-  }
+  for (let i = count; i > 0; i--) {
+    const date = new Date(now)
+    date.setDate(date.getDate() - i)
+    if (date.getDay() === 0 || date.getDay() === 6) continue
 
-  // Use multiplier to simulate longer timeframes
-  const multiplier = period === "1W" ? 1 : period === "1M" ? 1.02 : period === "3M" ? 1.08 : period === "1Y" ? 1.2 : period === "ALL" ? 1.35 : 1
+    const volatility = basePrice * 0.015
+    const open = price
+    const change = (Math.random() - 0.45) * volatility
+    const close = open + change
+    const high = Math.max(open, close) + Math.random() * volatility * 0.5
+    const low = Math.min(open, close) - Math.random() * volatility * 0.5
 
-  const sliced = sparkline.slice(0, sliceCount)
-  const timeLabels = period === "1D"
-    ? cryptoPriceHistory.map((p) => p.time)
-    : sliced.map((_, i) => `${i + 1}`)
-
-  const data = sliced.map((val, i) => {
-    const scaled = val * (1 + (i / sliced.length) * (multiplier - 1))
-    return {
-      time: timeLabels[i] ?? `${i + 1}`,
-      portfolio: Math.round(scaled * 100) / 100,
-      movingAvg: Math.round(scaled * 0.985 * 100) / 100,
-    }
-  })
-
-  // Append live price as last point
-  if (data.length > 0) {
     data.push({
-      time: "Now",
-      portfolio: livePrice,
-      movingAvg: Math.round(livePrice * 0.985 * 100) / 100,
+      date: date.toISOString().split("T")[0],
+      openClose: [
+        Math.round(open * 100) / 100,
+        Math.round(close * 100) / 100,
+      ],
+      high: Math.round(high * 100) / 100,
+      low: Math.round(low * 100) / 100,
     })
+    price = close
   }
-
   return data
 }
 
+/* ── candlestick shape ────────────────────────────────────────────────── */
+
+interface CandlestickProps {
+  x: number
+  y: number
+  width: number
+  height: number
+  low: number
+  high: number
+  openClose: [number, number]
+}
+
+function CandlestickShape(props: CandlestickProps) {
+  const { x, y, width, height, low, high, openClose: [open, close] } = props
+  const isGrowing = open < close
+  const ratio = Math.abs(height / (open - close)) || 0
+
+  return (
+    <g>
+      <path
+        className={isGrowing ? "fill-emerald-500" : "fill-rose-500"}
+        d={`M ${x},${y} L ${x},${y + height} L ${x + width},${y + height} L ${x + width},${y} Z`}
+      />
+      <g className={isGrowing ? "stroke-emerald-500" : "stroke-rose-500"} strokeWidth="1">
+        {isGrowing ? (
+          <>
+            <path d={`M ${x + width / 2},${y + height} v ${(open - low) * ratio}`} />
+            <path d={`M ${x + width / 2},${y} v ${(close - high) * ratio}`} />
+          </>
+        ) : (
+          <>
+            <path d={`M ${x + width / 2},${y} v ${(close - low) * ratio}`} />
+            <path d={`M ${x + width / 2},${y + height} v ${(open - high) * ratio}`} />
+          </>
+        )}
+      </g>
+    </g>
+  )
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function renderCandlestick(props: any) {
+  const { x, y, width, height, payload } = props as {
+    x: number; y: number; width: number; height: number
+    payload?: CandlestickData
+  }
+  if (payload?.openClose) {
+    return (
+      <CandlestickShape
+        x={x} y={y} width={width} height={height}
+        low={payload.low} high={payload.high} openClose={payload.openClose}
+      />
+    )
+  }
+  return <CandlestickShape x={0} y={0} width={0} height={0} low={0} high={0} openClose={[0, 0]} />
+}
+
+/* ── tooltip ──────────────────────────────────────────────────────────── */
+
+function CandlestickTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload?: CandlestickData }> }) {
+  if (!active || !payload?.length) return null
+  const d = payload[0]?.payload
+  if (!d) return null
+  const [open, close] = d.openClose
+  const isGrowing = close > open
+
+  return (
+    <div className="rounded-lg border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-md">
+      <p className="mb-1 font-medium">
+        {new Date(d.date).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+      </p>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-muted-foreground">
+        <span>Open</span><span className="text-right font-medium text-foreground tabular-nums">{open.toLocaleString()}</span>
+        <span>High</span><span className="text-right font-medium text-foreground tabular-nums">{d.high.toLocaleString()}</span>
+        <span>Low</span><span className="text-right font-medium text-foreground tabular-nums">{d.low.toLocaleString()}</span>
+        <span>Close</span>
+        <span className={cn("text-right font-medium tabular-nums", isGrowing ? "text-emerald-500" : "text-rose-500")}>
+          {close.toLocaleString()}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+/* ── config ────────────────────────────────────────────────────────────── */
+
 const chartConfig = {
-  portfolio: {
-    label: "Portfolio Value",
-    color: "var(--color-primary)",
-  },
-  movingAvg: {
-    label: "Moving Average",
-    color: "var(--color-muted-foreground)",
-  },
+  openClose: { label: "Price", color: "var(--chart-1)" },
 } satisfies ChartConfig
 
 const PERIODS = ["1D", "1W", "1M", "3M", "1Y", "ALL"] as const
+const PERIOD_DAYS: Record<string, number> = { "1D": 5, "1W": 10, "1M": 25, "3M": 65, "1Y": 250, ALL: 250 }
 
 /* ── component ─────────────────────────────────────────────────────────── */
 
@@ -93,74 +171,66 @@ interface CoinInsightProps {
 
 export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
   const [period, setPeriod] = React.useState<string>("1M")
-  const [flashDirection, setFlashDirection] = React.useState<"up" | "down" | null>(null)
-  const [prevPrice, setPrevPrice] = React.useState<number>(0)
 
   const coin = cryptoCoins.find((c) => c.id === selectedCoin)
   const livePrice = prices[selectedCoin] ?? (coin?.price ?? 0)
 
-  React.useEffect(() => {
-    if (prevPrice > 0) {
-      if (livePrice > prevPrice) setFlashDirection("up")
-      else if (livePrice < prevPrice) setFlashDirection("down")
-      else setFlashDirection(null)
-    }
-
-    const timer = setTimeout(() => {
-      setPrevPrice(livePrice)
-      setFlashDirection(null)
-    }, 600)
-    return () => clearTimeout(timer)
-  }, [livePrice, prevPrice])
-
   const data = React.useMemo(
-    () => buildChartData(selectedCoin, period, livePrice),
-    [selectedCoin, period, livePrice]
+    () => generateCandlestickData(livePrice, PERIOD_DAYS[period] ?? 25),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedCoin, period]
   )
+
+  const minVal = data.reduce((m, d) => Math.min(m, d.low, ...d.openClose), Infinity)
+  const maxVal = data.reduce((m, d) => Math.max(m, d.high, ...d.openClose), -Infinity)
+  const pad = (maxVal - minVal) * 0.1
+
+  const lastCandle = data[data.length - 1]
+  const lastClose = lastCandle?.openClose[1]
+  const lastIsGrowing = lastCandle ? lastCandle.openClose[1] > lastCandle.openClose[0] : true
+
+  const formatTick = (val: string, idx: number) => {
+    const d = new Date(val)
+    const mo = d.getMonth()
+    const yr = d.getFullYear().toString().slice(2)
+    if (idx === 0) return `${d.toLocaleString("en-US", { month: "short" })} '${yr}`
+    const prev = data[idx - 1]
+    if (prev && new Date(prev.date).getMonth() !== mo) {
+      return `${d.toLocaleString("en-US", { month: "short" })} '${yr}`
+    }
+    return ""
+  }
 
   return (
     <Card className="lg:col-span-8">
       <CardHeader>
         <div className="flex items-center gap-3">
-          <CardTitle>
-            {coin?.name ?? "Coin"} Insight
-          </CardTitle>
-          {/* Live price display with flash */}
-          <motion.span
-            key={livePrice}
-            initial={
-              flashDirection
-                ? { backgroundColor: flashDirection === "up" ? "rgba(16,185,129,0.25)" : "rgba(239,68,68,0.25)" }
-                : undefined
-            }
-            animate={{ backgroundColor: "rgba(0,0,0,0)" }}
-            transition={{ duration: 0.6 }}
-            className="rounded px-2 py-0.5 text-sm font-bold tabular-nums"
-          >
+          <CardTitle>{coin?.name ?? "Coin"} Insight</CardTitle>
+          <span className={cn(
+            "rounded px-2 py-0.5 text-sm font-bold tabular-nums",
+            lastIsGrowing ? "text-emerald-500" : "text-rose-500"
+          )}>
             ${livePrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </motion.span>
+          </span>
         </div>
         <CardAction>
           <Button variant="ghost" size="sm" className="gap-1 text-xs text-muted-foreground">
-            More Insight
-            <ArrowRightIcon className="size-3" />
+            More Insight <ArrowRightIcon className="size-3" />
           </Button>
         </CardAction>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* legend */}
-        <div className="flex items-center gap-5 text-xs text-muted-foreground">
+        {/* Legend */}
+        <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-0.5 w-4 rounded-full bg-primary" />
-            {coin?.symbol ?? "Coin"} Price
+            <span className="inline-block size-2.5 rounded-sm bg-emerald-500" /> Bullish
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-0.5 w-4 rounded-full border-b border-dashed border-muted-foreground" />
-            Moving Average
+            <span className="inline-block size-2.5 rounded-sm bg-rose-500" /> Bearish
           </span>
         </div>
 
-        {/* animated chart area */}
+        {/* Candlestick chart */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`${selectedCoin}-${period}`}
@@ -169,55 +239,63 @@ export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
           >
-            <ChartContainer config={chartConfig} className="aspect-auto h-[240px] w-full">
-              <AreaChart data={data} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
-                <defs>
-                  <linearGradient id="portfolioGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={0.2} />
-                    <stop offset="100%" stopColor="var(--color-primary)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-border" />
+            <ChartContainer
+              config={chartConfig}
+              className="aspect-auto h-[280px] w-full [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted/30"
+            >
+              <BarChart data={data} maxBarSize={12} margin={{ left: 8, right: 45 }}>
+                <CartesianGrid vertical={false} strokeWidth={1} className="stroke-border/50" />
                 <XAxis
-                  dataKey="time"
+                  dataKey="date"
                   tickLine={false}
-                  axisLine={false}
-                  tickMargin={8}
-                  className="text-xs"
+                  tickFormatter={formatTick}
+                  interval={0}
+                  minTickGap={5}
+                  tickMargin={10}
+                  className="text-[11px]"
                 />
                 <YAxis
-                  hide
-                  domain={["dataMin - 200", "dataMax + 200"]}
+                  domain={[minVal - pad, maxVal + pad]}
+                  tickCount={6}
+                  tickLine={false}
+                  orientation="right"
+                  className="text-[11px]"
+                  tickFormatter={(v: number) =>
+                    v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v.toFixed(2)
+                  }
                 />
-                <ChartTooltip
-                  cursor={{ stroke: "var(--color-border)", strokeDasharray: "4 4" }}
-                  content={<ChartTooltipContent indicator="line" />}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="portfolio"
-                  stroke="var(--color-primary)"
-                  strokeWidth={2}
-                  fill="url(#portfolioGrad)"
-                  isAnimationActive={true}
-                  animationDuration={500}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="movingAvg"
-                  stroke="var(--color-muted-foreground)"
-                  strokeWidth={1.5}
-                  strokeDasharray="6 3"
-                  fill="none"
-                  isAnimationActive={true}
-                  animationDuration={500}
-                />
-              </AreaChart>
+                {lastClose != null && (
+                  <ReferenceLine
+                    y={lastClose}
+                    stroke="var(--color-muted-foreground)"
+                    opacity={0.5}
+                    strokeWidth={1}
+                    strokeDasharray="2 2"
+                    label={({ viewBox }: { viewBox: { x: number; y: number; width: number } }) => (
+                      <g transform={`translate(${viewBox.x + viewBox.width + 5},${viewBox.y})`}>
+                        <rect x={-2} y={-10} width={42} height={20}
+                          fill={lastIsGrowing ? "var(--color-emerald-500)" : "var(--color-rose-500)"}
+                          rx={4}
+                        />
+                        <text x={2} y={4} fill="#fff" fontSize={10} fontWeight="500" textAnchor="start" className="tabular-nums">
+                          {lastClose >= 1000 ? `${(lastClose / 1000).toFixed(1)}k` : lastClose.toFixed(2)}
+                        </text>
+                      </g>
+                    )}
+                  />
+                )}
+                <ChartTooltip content={<CandlestickTooltip />} />
+                <Bar dataKey="openClose" shape={renderCandlestick}>
+                  {data.map((d) => (
+                    <Cell key={d.date} />
+                  ))}
+                </Bar>
+              </BarChart>
             </ChartContainer>
           </motion.div>
         </AnimatePresence>
 
-        {/* period pills */}
+        {/* Period pills */}
         <div className="flex items-center gap-1">
           {PERIODS.map((p) => (
             <button

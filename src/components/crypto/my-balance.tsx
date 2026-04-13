@@ -166,11 +166,12 @@ export function MyBalance({ prices }: { prices: CryptoPrices }) {
               className="overflow-hidden"
             >
               <Input
-                type="number"
+                type="text"
+                inputMode="decimal"
                 placeholder="Enter amount..."
                 value={topUpAmount}
                 onChange={(e) => setTopUpAmount(e.target.value)}
-                className="mb-2"
+                className="mb-2 focus-visible:ring-0"
                 autoFocus
                 onKeyDown={(e) => e.key === "Enter" && handleTopUp()}
               />
@@ -184,11 +185,12 @@ export function MyBalance({ prices }: { prices: CryptoPrices }) {
               className="overflow-hidden"
             >
               <Input
-                type="number"
+                type="text"
+                inputMode="decimal"
                 placeholder="Enter amount..."
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
-                className="mb-2"
+                className="mb-2 focus-visible:ring-0"
                 autoFocus
                 onKeyDown={(e) => e.key === "Enter" && handleWithdraw()}
               />
