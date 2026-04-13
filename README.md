@@ -19,7 +19,8 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 
 ## Features
 
-- **10 fully built pages** — Dashboard, Accounts, Transactions, Transfers, Cards, Analytics, Investments, Budgets, Settings, Notifications
+- **11 fully built pages** — Dashboard, Accounts, Transactions, Transfers, Cards, Crypto, Analytics, Investments, Budgets, Settings, Notifications
+- **Crypto dashboard** — Candlestick chart, live portfolio, trade form, market overview with 8 coins
 - **Drag-and-drop dashboard** — Rearrange widgets with dnd-kit, persisted to localStorage
 - **Interactive credit cards** — 3D flip animation, freeze toggle, virtual card generator
 - **Live investment ticker** — Simulated real-time price updates with flash animations
@@ -41,6 +42,7 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 | `/transfers` | Send/receive/scheduled transfers with stats and quick send |
 | `/cards` | 3D flip card, freeze/unfreeze, spending controls, virtual card creator |
 | `/analytics` | Spending heatmap, category breakdown, recurring charges, AI insights |
+| `/crypto` | Candlestick chart, portfolio balance, top coins, trade form, market overview |
 | `/investments` | Portfolio allocation, holdings with sparklines, live ticker, watchlist |
 | `/budgets` | Budget rings, savings goals, spending calendar, month projection |
 | `/settings` | Profile, security, notifications, billing, appearance |
