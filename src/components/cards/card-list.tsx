@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 import type { CardData } from "@/data/seed"
 
@@ -44,9 +45,18 @@ export function CardList({
             )}
           >
             <div className="flex h-full flex-col justify-between">
-              <span className="text-xs font-medium leading-tight">
-                {card.name}
-              </span>
+              <div className="flex items-start justify-between">
+                <span className="text-xs font-medium leading-tight">
+                  {card.name}
+                </span>
+                <Image
+                  src={card.network === "visa" ? "/logos/visa-com.png" : "/logos/mastercard-com.png"}
+                  alt={card.network}
+                  width={32}
+                  height={20}
+                  className="h-4 w-auto object-contain brightness-0 invert opacity-70"
+                />
+              </div>
               <div>
                 <p className="font-mono text-[10px] tabular-nums opacity-80">
                   **** {card.last4}

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence } from "motion/react"
 import { SnowflakeIcon, WifiIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -41,9 +42,13 @@ export function InteractiveCard({
           {/* Top row */}
           <div className="flex items-start justify-between">
             <span className="text-sm font-medium">{card.name}</span>
-            <span className="text-xs font-bold uppercase tracking-wider">
-              {card.network === "visa" ? "VISA" : "MASTERCARD"}
-            </span>
+            <Image
+              src={card.network === "visa" ? "/logos/visa-com.png" : "/logos/mastercard-com.png"}
+              alt={card.network}
+              width={48}
+              height={32}
+              className="h-6 w-auto object-contain brightness-0 invert opacity-80"
+            />
           </div>
 
           {/* Chip + NFC */}
