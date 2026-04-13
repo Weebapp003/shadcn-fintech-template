@@ -21,7 +21,11 @@ import {
   InputGroupInput,
   InputGroupButton,
 } from "@/components/ui/input-group"
-import { Globe } from "@/components/ui/globe"
+import dynamic from "next/dynamic"
+
+const GlobeDemo = dynamic(() => import("@/components/globe-demo"), {
+  ssr: false,
+})
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -73,10 +77,8 @@ export default function SignInPage() {
         </div>
 
         {/* Globe */}
-        <div className="flex flex-1 items-center justify-center px-8">
-          <div className="aspect-square w-full max-w-lg">
-            <Globe />
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+          <GlobeDemo />
         </div>
 
         {/* Quote overlay */}
