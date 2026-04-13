@@ -1,7 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import { TrendingUpIcon, TrendingDownIcon, ClockIcon } from "lucide-react"
+import { TrendingUpIcon, TrendingDownIcon, ClockIcon, BuildingIcon } from "lucide-react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -20,6 +21,8 @@ const fmt = (n: number, currency = "$") =>
   }).format(Math.abs(n))}`
 
 export function AccountCard({ account, index, onSelect }: AccountCardProps) {
+  const [imgError, setImgError] = useState(false)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -42,14 +45,21 @@ export function AccountCard({ account, index, onSelect }: AccountCardProps) {
       <div className="p-4 pl-5">
         {/* Institution row */}
         <div className="flex items-center gap-2">
-          <Image
-            src={account.institutionLogo}
-            alt={account.institution}
-            width={32}
-            height={32}
-            unoptimized
-            className="size-8 rounded-full bg-muted object-cover"
-          />
+          {imgError ? (
+            <div className="flex size-8 items-center justify-center rounded-full bg-muted">
+              <BuildingIcon className="size-4 text-muted-foreground" />
+            </div>
+          ) : (
+            <Image
+              src={account.institutionLogo}
+              alt={account.institution}
+              width={32}
+              height={32}
+              unoptimized
+              className="size-8 rounded-full bg-muted object-cover"
+              onError={() => setImgError(true)}
+            />
+          )}
           <span className="text-xs text-muted-foreground">
             {account.institution}
           </span>
