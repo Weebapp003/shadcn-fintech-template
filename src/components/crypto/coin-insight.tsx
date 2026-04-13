@@ -42,27 +42,28 @@ function generateCandlestickData(basePrice: number, count: number): CandlestickD
   const data: CandlestickData[] = []
   let price = basePrice * 0.92
   const now = new Date()
+  // Use enough decimal precision so small-price coins have visible candles
+  const decimals = basePrice >= 100 ? 2 : basePrice >= 1 ? 4 : 6
+  const factor = Math.pow(10, decimals)
+  const round = (v: number) => Math.round(v * factor) / factor
 
   for (let i = count; i > 0; i--) {
     const date = new Date(now)
     date.setDate(date.getDate() - i)
     if (date.getDay() === 0 || date.getDay() === 6) continue
 
-    const volatility = basePrice * 0.015
+    const volatility = price * 0.025
     const open = price
     const change = (Math.random() - 0.45) * volatility
     const close = open + change
-    const high = Math.max(open, close) + Math.random() * volatility * 0.5
-    const low = Math.min(open, close) - Math.random() * volatility * 0.5
+    const high = Math.max(open, close) + Math.random() * volatility * 0.4
+    const low = Math.min(open, close) - Math.random() * volatility * 0.4
 
     data.push({
       date: date.toISOString().split("T")[0],
-      openClose: [
-        Math.round(open * 100) / 100,
-        Math.round(close * 100) / 100,
-      ],
-      high: Math.round(high * 100) / 100,
-      low: Math.round(low * 100) / 100,
+      openClose: [round(open), round(close)],
+      high: round(high),
+      low: round(low),
     })
     price = close
   }
@@ -160,7 +161,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const PERIODS = ["1D", "1W", "1M", "3M", "1Y", "ALL"] as const
-const PERIOD_DAYS: Record<string, number> = { "1D": 5, "1W": 10, "1M": 25, "3M": 65, "1Y": 250, ALL: 250 }
+const PERIOD_DAYS: Record<string, number> = { "1D": 15, "1W": 30, "1M": 60, "3M": 130, "1Y": 365, ALL: 365 }
 
 /* ── component ─────────────────────────────────────────────────────────── */
 
@@ -170,7 +171,7 @@ interface CoinInsightProps {
 }
 
 export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
-  const [period, setPeriod] = React.useState<string>("1M")
+  const [period, setPeriod] = React.useState<string>("3M")
 
   const coin = cryptoCoins.find((c) => c.id === selectedCoin)
   const livePrice = prices[selectedCoin] ?? (coin?.price ?? 0)
@@ -241,39 +242,37 @@ export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
           >
             <ChartContainer
               config={chartConfig}
-              className="aspect-auto h-[280px] w-full [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted/30"
+              className="aspect-auto h-[340px] w-full [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-zinc-950/5 dark:[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-zinc-950/25 [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/64 [&_.recharts-cartesian-axis-line]:stroke-border/64 [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground/72 dark:[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground/64"
             >
-              <BarChart data={data} maxBarSize={12} margin={{ left: 8, right: 45 }}>
-                <CartesianGrid vertical={false} strokeWidth={1} className="stroke-border/50" />
+              <BarChart data={data} maxBarSize={20} margin={{ left: 20, right: -5 }}>
+                <CartesianGrid vertical={false} strokeWidth={1} />
                 <XAxis
                   dataKey="date"
                   tickLine={false}
                   tickFormatter={formatTick}
                   interval={0}
                   minTickGap={5}
-                  tickMargin={10}
-                  className="text-[11px]"
+                  tickMargin={12}
                 />
                 <YAxis
                   domain={[minVal - pad, maxVal + pad]}
-                  tickCount={6}
+                  tickCount={7}
                   tickLine={false}
                   orientation="right"
-                  className="text-[11px]"
                   tickFormatter={(v: number) =>
-                    v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v.toFixed(2)
+                    v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v >= 1 ? v.toFixed(2) : v.toFixed(4)
                   }
                 />
                 {lastClose != null && (
                   <ReferenceLine
                     y={lastClose}
-                    stroke="var(--color-muted-foreground)"
+                    stroke="var(--muted-foreground)"
                     opacity={0.5}
                     strokeWidth={1}
                     strokeDasharray="2 2"
                     label={({ viewBox }: { viewBox: { x: number; y: number; width: number } }) => (
                       <g transform={`translate(${viewBox.x + viewBox.width + 5},${viewBox.y})`}>
-                        <rect x={-2} y={-10} width={42} height={20}
+                        <rect x={-2} y={-10} width={50} height={20}
                           fill={lastIsGrowing ? "var(--color-emerald-500)" : "var(--color-rose-500)"}
                           rx={4}
                         />
