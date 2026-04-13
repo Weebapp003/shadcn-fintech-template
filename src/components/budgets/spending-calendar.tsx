@@ -80,7 +80,7 @@ export function SpendingCalendar() {
                   >
                     <span className="text-[11px] font-medium">{cell.day}</span>
                     {cell.amount > 0 && (
-                      <span className="text-[9px] tabular-nums text-muted-foreground">
+                      <span className="hidden text-[9px] tabular-nums text-muted-foreground sm:inline">
                         ${cell.amount}
                       </span>
                     )}

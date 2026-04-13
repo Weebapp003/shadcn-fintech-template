@@ -124,7 +124,7 @@ export function MyBalance({ prices }: { prices: CryptoPrices }) {
           ${totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </motion.p>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {stats.map((stat) => (
             <div key={stat.label} className="space-y-1">
               <p className="text-xs text-muted-foreground">{stat.label}</p>

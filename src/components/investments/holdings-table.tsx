@@ -141,6 +141,7 @@ export function HoldingsTable() {
         <CardTitle>Holdings</CardTitle>
       </CardHeader>
       <CardContent className="px-0">
+        <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -151,7 +152,7 @@ export function HoldingsTable() {
                 Asset <SortIcon col="name" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
-                className="cursor-pointer select-none text-right"
+                className="hidden cursor-pointer select-none text-right sm:table-cell"
                 onClick={() => cycleSortDir("quantity")}
               >
                 Qty <SortIcon col="quantity" sortKey={sortKey} sortDir={sortDir} />
@@ -175,7 +176,7 @@ export function HoldingsTable() {
                 P&L % <SortIcon col="plPct" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
-                className="cursor-pointer select-none text-right"
+                className="hidden cursor-pointer select-none text-right md:table-cell"
                 onClick={() => cycleSortDir("plDollar")}
               >
                 P&L $ <SortIcon col="plDollar" sortKey={sortKey} sortDir={sortDir} />
@@ -208,7 +209,7 @@ export function HoldingsTable() {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell className="text-right tabular-nums">
+                  <TableCell className="hidden text-right tabular-nums sm:table-cell">
                     {h.quantity}
                   </TableCell>
                   <TableCell className="hidden text-right tabular-nums lg:table-cell">
@@ -250,7 +251,7 @@ export function HoldingsTable() {
                   </TableCell>
                   <TableCell
                     className={cn(
-                      "text-right tabular-nums font-medium",
+                      "hidden text-right tabular-nums font-medium md:table-cell",
                       positive ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
                     )}
                   >
@@ -279,6 +280,7 @@ export function HoldingsTable() {
             })}
           </TableBody>
         </Table>
+        </div>
       </CardContent>
     </Card>
   )

@@ -40,7 +40,7 @@ export function TransactionFilters({
   return (
     <div className="flex flex-wrap items-center gap-2">
       {/* Search */}
-      <div className="relative min-w-[200px] flex-1">
+      <div className="relative w-full sm:min-w-[200px] sm:flex-1">
         <SearchIcon className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Search transactions..."

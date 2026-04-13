@@ -500,8 +500,8 @@ export function SettingsPageClient() {
   }
 
   return (
-    <div className="flex flex-1 gap-6">
-      {/* Left nav */}
+    <div className="flex flex-1 flex-col gap-4 lg:flex-row lg:gap-6">
+      {/* Left nav (desktop) */}
       <nav className="hidden w-52 shrink-0 flex-col gap-1 lg:flex">
         {tabs.map((tab) => (
           <Button
@@ -521,7 +521,7 @@ export function SettingsPageClient() {
       </nav>
 
       {/* Mobile tab bar */}
-      <div className="flex gap-1 overflow-x-auto border-b pb-2 lg:hidden">
+      <div className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-2 lg:hidden">
         {tabs.map((tab) => (
           <Button
             key={tab.id}

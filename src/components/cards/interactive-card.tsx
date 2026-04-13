@@ -21,7 +21,7 @@ export function InteractiveCard({
 
   return (
     <div
-      className="aspect-[1.586/1] w-full max-w-[400px] cursor-pointer"
+      className="aspect-[1.586/1] w-full cursor-pointer sm:max-w-[400px]"
       style={{ perspective: "1000px" }}
       onClick={() => setFlipped((f) => !f)}
     >

@@ -67,7 +67,7 @@ export function MonthComparison() {
           <div>
             <CardTitle>Month vs Last Month</CardTitle>
             <CardDescription>
-              <span className="flex items-center gap-3 text-xs">
+              <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                 <span className="flex items-center gap-1.5">
                   <span className="size-2 rounded-full bg-primary" />
                   This Month{" "}
@@ -87,7 +87,7 @@ export function MonthComparison() {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="min-w-0">
         <ChartContainer config={chartConfig} className="h-[280px] w-full">
           <BarChart
             data={monthComparisons}

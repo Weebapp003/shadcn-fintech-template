@@ -83,12 +83,12 @@ export function FinancialOverview() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <CardHeader className="flex flex-col gap-3 space-y-0 pb-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <CardTitle className="text-base font-semibold">
             Financial Overview
           </CardTitle>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-primary" />
               Current Year{" "}
@@ -111,7 +111,7 @@ export function FinancialOverview() {
               <Button
                 variant="outline"
                 className={cn(
-                  "h-8 w-[200px] justify-start text-left text-xs font-normal",
+                  "h-8 w-full justify-start text-left text-xs font-normal sm:w-[200px]",
                   !date && "text-muted-foreground"
                 )}
               />

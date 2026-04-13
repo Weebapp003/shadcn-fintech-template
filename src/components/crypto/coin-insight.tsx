@@ -205,7 +205,7 @@ export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
   return (
     <Card className="lg:col-span-8">
       <CardHeader>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <CardTitle>{coin?.name ?? "Coin"} Insight</CardTitle>
           <span className={cn(
             "rounded px-2 py-0.5 text-sm font-bold tabular-nums",
@@ -220,7 +220,7 @@ export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
           </Button>
         </CardAction>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="min-w-0 space-y-4">
         {/* Legend */}
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
@@ -295,7 +295,7 @@ export function CoinInsight({ prices, selectedCoin }: CoinInsightProps) {
         </AnimatePresence>
 
         {/* Period pills */}
-        <div className="flex items-center gap-1">
+        <div className="flex flex-wrap items-center gap-1">
           {PERIODS.map((p) => (
             <button
               key={p}

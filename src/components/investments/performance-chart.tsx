@@ -40,9 +40,9 @@ export function PerformanceChart() {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <CardTitle>Performance</CardTitle>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             {PERIODS.map((p) => (
               <button
                 key={p.label}

@@ -158,6 +158,7 @@ export function MarketOverview({ prices, originalPrices, selectedCoin, onSelectC
         </CardAction>
       </CardHeader>
       <CardContent className="px-0">
+        <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -170,7 +171,7 @@ export function MarketOverview({ prices, originalPrices, selectedCoin, onSelectC
                 <SortIndicator field="price" />
               </TableHead>
               <TableHead
-                className="cursor-pointer select-none text-right"
+                className="hidden cursor-pointer select-none text-right sm:table-cell"
                 onClick={() => handleSort("volume")}
               >
                 Volume
@@ -238,7 +239,7 @@ export function MarketOverview({ prices, originalPrices, selectedCoin, onSelectC
                       })}
                     </motion.span>
                   </TableCell>
-                  <TableCell className="text-right tabular-nums text-muted-foreground">
+                  <TableCell className="hidden text-right tabular-nums text-muted-foreground sm:table-cell">
                     {compactNumber(coin.liveVolume)}
                   </TableCell>
                   <TableCell className="text-right">
@@ -287,6 +288,7 @@ export function MarketOverview({ prices, originalPrices, selectedCoin, onSelectC
             )}
           </TableBody>
         </Table>
+        </div>
       </CardContent>
     </Card>
   )

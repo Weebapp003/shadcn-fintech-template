@@ -86,6 +86,7 @@ export function TransactionTable({
 
   return (
     <div className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
+      <div className="overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -138,6 +139,7 @@ export function TransactionTable({
           })}
         </TableBody>
       </Table>
+      </div>
     </div>
   )
 }
