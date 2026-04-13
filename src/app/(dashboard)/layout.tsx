@@ -19,7 +19,7 @@ export default function DashboardLayout({
             <ThemeToggle />
           </div>
         </div>
-        {children}
+        <main className="flex flex-1 flex-col">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -189,12 +190,12 @@ function NotificationDropdown({ icon, badge }: { icon: React.ReactNode; badge: n
           })}
         </div>
         <div className="border-t p-2">
-          <a
+          <Link
             href="/notifications"
             className="flex items-center justify-center rounded-md py-1.5 text-xs font-medium text-primary hover:bg-muted transition-colors"
           >
             View all notifications
-          </a>
+          </Link>
         </div>
       </PopoverContent>
     </Popover>
@@ -220,7 +221,7 @@ export function NavSecondary({
               {item.title === "Notifications" ? (
                 <NotificationDropdown icon={item.icon} badge={unreadCount} />
               ) : (
-                <SidebarMenuButton size="sm" render={<a href={item.url} />}>
+                <SidebarMenuButton size="sm" render={<Link href={item.url} />}>
                   {item.icon}
                   <span>{item.title}</span>
                 </SidebarMenuButton>

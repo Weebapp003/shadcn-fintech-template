@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   SidebarGroup,
@@ -31,7 +32,7 @@ export function NavMain({
             <SidebarMenuButton
               isActive={pathname === item.url}
               tooltip={item.title}
-              render={<a href={item.url} />}
+              render={<Link href={item.url} />}
             >
               {item.icon}
               <span>{item.title}</span>

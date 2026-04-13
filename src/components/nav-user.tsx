@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import {
   Avatar,
   AvatarFallback,
@@ -82,19 +83,19 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem render={<a href="/settings" />}>
+              <DropdownMenuItem render={<Link href="/settings" />}>
                 <BadgeCheckIcon
                 />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem render={<a href="/settings?tab=billing" />}>
+              <DropdownMenuItem render={<Link href="/settings?tab=billing" />}>
                 <CreditCardIcon
                 />
                 Billing
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem render={<a href="/sign-in" />}>
+            <DropdownMenuItem render={<Link href="/sign-in" />}>
               <LogOutIcon
               />
               Log out
