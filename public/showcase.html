@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadcn Fintech — Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f8f8f6;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .container {
+    width: 1200px;
+    height: 630px; /* OG image ratio */
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8f8f6 0%, #eeeee8 100%);
+  }
+
+  /* ── Headline ── */
+  .headline {
+    text-align: center;
+    padding-top: 40px;
+    position: relative;
+    z-index: 10;
+  }
+  .headline h1 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #0a0a0a;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  /* ── Social proof ── */
+  .social-proof {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .social-proof-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .avatars {
+    display: flex;
+  }
+  .avatars img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2.5px solid #f8f8f6;
+    margin-left: -10px;
+    object-fit: cover;
+  }
+  .avatars img:first-child { margin-left: 0; }
+  .stars {
+    display: flex;
+    gap: 2px;
+    color: #f59e0b;
+    font-size: 22px;
+  }
+  .social-text {
+    font-size: 12px;
+    color: #a1a1aa;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Dashboard screenshot ── */
+  .screenshot-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 210px;
+    transform: translateX(-50%) perspective(1200px) rotateX(4deg);
+    z-index: 5;
+  }
+  .screenshot {
+    width: 920px;
+    height: 575px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 80px -20px rgba(0,0,0,0.18),
+      0 0 0 1px rgba(0,0,0,0.06);
+    background: white;
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 80%);
+    mask-image: linear-gradient(to bottom, black 40%, transparent 80%);
+  }
+  .screenshot iframe {
+    border: none;
+    width: 1440px;
+    height: 900px;
+    transform: scale(0.639);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+
+  /* ── Floating tech badges ── */
+  .badge {
+    position: absolute;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px -4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04);
+    font-size: 13px;
+    font-weight: 600;
+    color: #18181b;
+  }
+  .badge img {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+  }
+
+  .badge-nextjs { top: 200px; left: 30px; transform: rotate(-4deg); }
+  .badge-shadcn { top: 280px; right: 40px; transform: rotate(3deg); }
+  .badge-tailwind { top: 420px; right: 20px; transform: rotate(-2deg); }
+  .badge-typescript { top: 380px; left: 20px; transform: rotate(2deg); }
+  .badge-motion { top: 500px; left: 80px; transform: rotate(-3deg); }
+
+  /* ── Subtle dots bg ── */
+  .container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.3;
+    z-index: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Headline -->
+    <div class="headline">
+      <h1>Free open-source @shadcn/ui<br>Fintech Dashboard Template</h1>
+    </div>
+
+    <!-- Social proof -->
+    <div class="social-proof">
+      <div class="social-proof-row">
+        <div class="avatars">
+          <img src="/avatars/1.jpg" alt="">
+          <img src="/avatars/3.jpg" alt="">
+          <img src="/avatars/5.jpg" alt="">
+          <img src="/avatars/8.jpg" alt="">
+          <img src="/avatars/user.jpg" alt="">
+        </div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      </div>
+      <span class="social-text">Loved by Developers</span>
+    </div>
+
+    <!-- Main screenshot -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot">
+        <iframe src="http://localhost:3000/dashboard"></iframe>
+      </div>
+    </div>
+
+    <!-- Floating tech badges -->
+    <div class="badge badge-nextjs">
+      <img src="https://img.logo.dev/nextjs.org?token=pk_Eq2WvCB6R5SRuKGWYAH7hw" alt="">
+      Next.js 16
+    </div>
+    <div class="badge badge-shadcn">
+      <img src="https://ui.shadcn.com/apple-touch-icon.png" alt="">
+      shadcn/ui
+    </div>
+    <div class="badge badge-tailwind">
+      <img src="https://img.logo.dev/tailwindcss.com?token=pk_Eq2WvCB6R5SRuKGWYAH7hw" alt="">
+      Tailwind CSS
+    </div>
+    <div class="badge badge-typescript">
+      <img src="https://img.logo.dev/typescriptlang.org?token=pk_Eq2WvCB6R5SRuKGWYAH7hw" alt="">
+      TypeScript
+    </div>
+    <div class="badge badge-motion">
+      <img src="https://img.logo.dev/motion.dev?token=pk_Eq2WvCB6R5SRuKGWYAH7hw" alt="">
+      Motion
+    </div>
+  </div>
+</body>
+</html>

@@ -2,8 +2,7 @@
 
 A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tailwind CSS. Designed for financial applications with real-world components, rich interactions, and polished dark mode support.
 
-<!-- Add your screenshot here -->
-<!-- ![Dashboard Preview](public/screenshots/dashboard.png) -->
+![Shadcn Fintech Dashboard](public/screenshots/shadcn-fintech.png)
 
 ## Features
 
