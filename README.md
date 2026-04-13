@@ -29,6 +29,7 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 - **Smart analytics** — Category drill-down donuts, recurring charge detector, AI insights
 - **Budget tracking** — Animated SVG progress rings, savings goals, month projection
 - **Quick transfers** — Contact selector with send simulation
+- **Auth pages** — Sign in / sign up with animated 3D globe, powered by [Clerk](https://clerk.com)
 - **Dark mode** — Full dark/light/system theme support
 - **Responsive** — Works on desktop, tablet, and mobile
 
@@ -47,6 +48,8 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 | `/budgets` | Budget rings, savings goals, spending calendar, month projection |
 | `/settings` | Profile, security, notifications, billing, appearance |
 | `/notifications` | Filterable notification feed with dismiss animations |
+| `/sign-in` | Auth page with animated 3D globe, social login, powered by Clerk |
+| `/sign-up` | Registration with name, email, password, terms acceptance |
 
 ## Tech Stack
 
@@ -58,6 +61,8 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 | Charts | [Recharts](https://recharts.org) |
 | Animations | [Motion](https://motion.dev) |
 | Drag & Drop | [@dnd-kit](https://dndkit.com) |
+| Auth | [Clerk](https://clerk.com) |
+| 3D Globe | [three-globe](https://github.com/vasturiano/three-globe) + [Aceternity UI](https://ui.aceternity.com) |
 | Icons | [Lucide React](https://lucide.dev) |
 | Language | TypeScript |
 
