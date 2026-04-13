@@ -25,6 +25,7 @@ import {
   LandmarkIcon,
   SendIcon,
   TrendingUpIcon,
+  BitcoinIcon,
   BellIcon,
 } from "lucide-react"
 
@@ -43,6 +44,7 @@ const data = {
   navMoney: [
     { title: "Transfers", url: "/transfers", icon: <SendIcon /> },
     { title: "Investments", url: "/investments", icon: <TrendingUpIcon /> },
+    { title: "Crypto", url: "/crypto", icon: <BitcoinIcon /> },
   ],
   navInsights: [
     { title: "Analytics", url: "/analytics", icon: <ChartAreaIcon /> },
