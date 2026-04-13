@@ -1,35 +1,26 @@
 "use client"
 
-import { useState } from "react"
-import { cryptoCoins } from "@/data/seed"
-import { CryptoPortfolio } from "@/components/crypto/crypto-portfolio"
-import { PriceChart } from "@/components/crypto/price-chart"
-import { CoinTable } from "@/components/crypto/coin-table"
-import { CryptoActivity } from "@/components/crypto/crypto-activity"
+import { MyBalance } from "@/components/crypto/my-balance"
+import { TopCoins } from "@/components/crypto/top-coins"
+import { MyPortfolio } from "@/components/crypto/my-portfolio"
+import { CoinInsight } from "@/components/crypto/coin-insight"
+import { TradeForm } from "@/components/crypto/trade-form"
+import { MarketOverview } from "@/components/crypto/market-overview"
 
 export function CryptoPageClient() {
-  const [selectedCoin, setSelectedCoin] = useState("btc")
-
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
-      {/* Row 1: Portfolio + Price Chart */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <CryptoPortfolio coins={cryptoCoins} />
-        </div>
-        <div className="lg:col-span-8">
-          <PriceChart
-            selectedCoin={selectedCoin}
-            onCoinChange={setSelectedCoin}
-          />
-        </div>
-      </div>
+    <div className="grid gap-4 px-4 pb-6 lg:grid-cols-12">
+      {/* Row 1 */}
+      <MyBalance />
+      <TopCoins />
 
-      {/* Row 2: Coin Market Table */}
-      <CoinTable coins={cryptoCoins} />
+      {/* Row 2 */}
+      <MyPortfolio />
+      <CoinInsight />
 
-      {/* Row 3: Recent Activity */}
-      <CryptoActivity />
+      {/* Row 3 */}
+      <TradeForm />
+      <MarketOverview />
     </div>
   )
 }
