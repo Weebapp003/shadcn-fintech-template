@@ -67,8 +67,13 @@ export function FinancialOverview() {
 
   const filteredData = useMemo(() => {
     if (!date?.from || !date?.to) return financialOverview
-    const fromMonth = date.from.getMonth()
-    const toMonth = date.to.getMonth()
+    let fromMonth = date.from.getMonth()
+    let toMonth = date.to.getMonth()
+    // Ensure at least 3 months are shown for readability
+    if (toMonth - fromMonth < 2) {
+      fromMonth = Math.max(0, fromMonth - 1)
+      toMonth = Math.min(11, toMonth + 1)
+    }
     return financialOverview.filter((d) => {
       const m = monthIndex[d.month]
       return m >= fromMonth && m <= toMonth
