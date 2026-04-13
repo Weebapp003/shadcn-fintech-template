@@ -57,7 +57,11 @@ export function TransfersPageClient() {
       <TransferList transfers={filtered} onCancel={handleCancel} />
 
       {/* Quick send */}
-      <QuickSend />
+      <QuickSend
+        onSend={(record) =>
+          setTransfers((prev) => [record, ...prev])
+        }
+      />
     </div>
   )
 }
