@@ -57,7 +57,6 @@ export function CardsPageClient() {
           <InteractiveCard
             card={activeCard}
             frozen={frozenMap[activeCardId] ?? false}
-            onToggleFreeze={toggleFreeze}
           />
         </div>
         <div className="lg:col-span-5">

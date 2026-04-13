@@ -65,7 +65,7 @@ export default function SignInPage() {
   return (
     <div className="flex min-h-svh">
       {/* Left panel - Globe */}
-      <div className="relative hidden w-1/2 flex-col justify-between bg-[#09090b] lg:flex">
+      <div className="relative hidden w-1/2 flex-col justify-between bg-zinc-950 lg:flex">
         {/* Logo */}
         <Link href="/dashboard" className="relative z-20 flex items-center gap-2.5 p-8">
           <div className="flex size-8 items-center justify-center rounded-lg bg-white text-black">
@@ -267,7 +267,7 @@ export default function SignInPage() {
             variants={itemVariants}
           >
             <ShieldCheckIcon className="size-3.5" />
-            <span>Secured by Clerk</span>
+            <span>256-bit SSL encrypted</span>
           </motion.div>
         </motion.div>
       </div>

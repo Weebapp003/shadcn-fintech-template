@@ -9,7 +9,6 @@ import type { CardData } from "@/data/seed"
 interface InteractiveCardProps {
   card: CardData
   frozen: boolean
-  onToggleFreeze: () => void
 }
 
 export function InteractiveCard({
