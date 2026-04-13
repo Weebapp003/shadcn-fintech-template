@@ -32,6 +32,7 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -93,7 +94,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem render={<a href="/sign-in" />}>
               <LogOutIcon
               />
               Log out

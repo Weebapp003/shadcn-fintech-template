@@ -27,6 +27,8 @@ import {
   TrendingUpIcon,
   BitcoinIcon,
   BellIcon,
+  LogInIcon,
+  UserPlusIcon,
 } from "lucide-react"
 
 const data = {
@@ -49,6 +51,10 @@ const data = {
   navInsights: [
     { title: "Analytics", url: "/analytics", icon: <ChartAreaIcon /> },
     { title: "Budgets", url: "/budgets", icon: <TargetIcon /> },
+  ],
+  navAuth: [
+    { title: "Sign In", url: "/sign-in", icon: <LogInIcon /> },
+    { title: "Sign Up", url: "/sign-up", icon: <UserPlusIcon /> },
   ],
   navSecondary: [
     { title: "Notifications", url: "/notifications", icon: <BellIcon /> },
@@ -81,6 +87,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navDaily} label="Daily" />
         <NavMain items={data.navMoney} label="Money" />
         <NavMain items={data.navInsights} label="Insights" />
+        <NavMain items={data.navAuth} label="Auth" />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
