@@ -97,4 +97,4 @@ Licensed under the [MIT License](LICENSE).
 
 ## Author
 
-Created with &lt;3 by **[Abderrahim Ghazali](https://github.com/abderrahimghazali)**
+Created with ❤️ by **[Abderrahim Ghazali](https://github.com/abderrahimghazali)**
