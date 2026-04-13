@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, LabelList } from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from "recharts"
 import {
   Card,
   CardContent,
@@ -29,11 +29,10 @@ const chartConfig = {
 } satisfies ChartConfig
 
 function ChangeLabel(props: Record<string, unknown>) {
-  const { x, y, width, value, index } = props as {
+  const { x, y, width, index } = props as {
     x: number
     y: number
     width: number
-    value: number
     index: number
   }
   const row = monthComparisons[index]

@@ -31,6 +31,12 @@ import { holdings as seedHoldings, type Holding } from "@/data/seed"
 type SortDir = "asc" | "desc" | null
 type SortKey = "name" | "quantity" | "avgBuyPrice" | "currentPrice" | "plPct" | "plDollar"
 
+function SortIcon({ col, sortKey, sortDir }: { col: SortKey; sortKey: SortKey | null; sortDir: SortDir }) {
+  if (sortKey !== col) return <ArrowUpDown className="ml-1 inline size-3 text-muted-foreground/50" />
+  if (sortDir === "asc") return <ArrowUp className="ml-1 inline size-3" />
+  return <ArrowDown className="ml-1 inline size-3" />
+}
+
 function getPl(h: Holding) {
   const pct = ((h.currentPrice - h.avgBuyPrice) / h.avgBuyPrice) * 100
   const dollar = (h.currentPrice - h.avgBuyPrice) * h.quantity
@@ -129,12 +135,6 @@ export function HoldingsTable() {
     return arr
   }, [holdings, sortKey, sortDir])
 
-  const SortIcon = ({ col }: { col: SortKey }) => {
-    if (sortKey !== col) return <ArrowUpDown className="ml-1 inline size-3 text-muted-foreground/50" />
-    if (sortDir === "asc") return <ArrowUp className="ml-1 inline size-3" />
-    return <ArrowDown className="ml-1 inline size-3" />
-  }
-
   return (
     <Card>
       <CardHeader>
@@ -148,37 +148,37 @@ export function HoldingsTable() {
                 className="cursor-pointer select-none pl-4"
                 onClick={() => cycleSortDir("name")}
               >
-                Asset <SortIcon col="name" />
+                Asset <SortIcon col="name" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
                 className="cursor-pointer select-none text-right"
                 onClick={() => cycleSortDir("quantity")}
               >
-                Qty <SortIcon col="quantity" />
+                Qty <SortIcon col="quantity" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
                 className="hidden cursor-pointer select-none text-right lg:table-cell"
                 onClick={() => cycleSortDir("avgBuyPrice")}
               >
-                Avg Buy <SortIcon col="avgBuyPrice" />
+                Avg Buy <SortIcon col="avgBuyPrice" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
                 className="cursor-pointer select-none text-right"
                 onClick={() => cycleSortDir("currentPrice")}
               >
-                Current <SortIcon col="currentPrice" />
+                Current <SortIcon col="currentPrice" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
                 className="cursor-pointer select-none text-right"
                 onClick={() => cycleSortDir("plPct")}
               >
-                P&L % <SortIcon col="plPct" />
+                P&L % <SortIcon col="plPct" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead
                 className="cursor-pointer select-none text-right"
                 onClick={() => cycleSortDir("plDollar")}
               >
-                P&L $ <SortIcon col="plDollar" />
+                P&L $ <SortIcon col="plDollar" sortKey={sortKey} sortDir={sortDir} />
               </TableHead>
               <TableHead className="hidden text-right pr-4 xl:table-cell">Trend</TableHead>
             </TableRow>

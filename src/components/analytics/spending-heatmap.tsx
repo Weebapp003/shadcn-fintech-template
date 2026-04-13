@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import {
   Card,
   CardContent,
@@ -31,11 +31,6 @@ function intensityClass(amount: number, max: number): string {
 }
 
 export function SpendingHeatmap() {
-  const [hoveredDay, setHoveredDay] = useState<{
-    date: string
-    amount: number
-  } | null>(null)
-
   const { grid, monthLabels, yearTotal, max } = useMemo(() => {
     const data = spendingHeatmapData
     const max = Math.max(...data.map((d) => d.amount))
@@ -149,8 +144,6 @@ export function SpendingHeatmap() {
                         height={CELL_SIZE}
                         rx={2}
                         className={`${intensityClass(cell.amount, max)} transition-colors hover:stroke-foreground/30 hover:stroke-1`}
-                        onMouseEnter={() => setHoveredDay(cell)}
-                        onMouseLeave={() => setHoveredDay(null)}
                       />
                     }
                   />

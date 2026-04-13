@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { aiInsights } from "@/data/seed"
 import { cn } from "@/lib/utils"
 import {

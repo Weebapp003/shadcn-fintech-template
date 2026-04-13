@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import {
   DndContext,
   pointerWithin,
@@ -10,7 +10,6 @@ import {
   useSensors,
   type DragStartEvent,
   type DragOverEvent,
-  type DragEndEvent,
 } from "@dnd-kit/core"
 import {
   arrayMove,
@@ -59,11 +58,9 @@ const nullStrategy = () => null
 function SortableWidget({
   block,
   editing,
-  isDragActive,
 }: {
   block: Block
   editing: boolean
-  isDragActive: boolean
 }) {
   const { attributes, listeners, setNodeRef, isDragging } = useSortable({
     id: block.id,
@@ -99,11 +96,8 @@ function SortableWidget({
 
 export function DashboardCustomizer() {
   const [editing, setEditing] = useState(false)
-  const [blocks, setBlocks] = useState(defaultBlocks)
-  const [activeId, setActiveId] = useState<string | null>(null)
-  const snapshot = useRef<Block[]>([])
-
-  useEffect(() => {
+  const [blocks, setBlocks] = useState(() => {
+    if (typeof window === "undefined") return defaultBlocks
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
       if (saved) {
@@ -114,10 +108,13 @@ export function DashboardCustomizer() {
         for (const b of defaultBlocks) {
           if (!reordered.find((r) => r.id === b.id)) reordered.push(b)
         }
-        setBlocks(reordered)
+        return reordered
       }
     } catch {}
-  }, [])
+    return defaultBlocks
+  })
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const snapshot = useRef<Block[]>([])
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
@@ -138,7 +135,7 @@ export function DashboardCustomizer() {
     })
   }
 
-  const handleDragEnd = (_event: DragEndEvent) => {
+  const handleDragEnd = () => {
     setActiveId(null)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks.map((b) => b.id)))
   }
@@ -207,7 +204,6 @@ export function DashboardCustomizer() {
                 key={block.id}
                 block={block}
                 editing={editing}
-                isDragActive={activeId !== null}
               />
             ))}
           </div>

@@ -31,11 +31,11 @@ export function MonthProjection() {
     const overBudget = projected > totalBudget
 
     // Build cumulative chart data
-    let cumulative = 0
-    const chartData = dailySpending.map((d, i) => {
-      cumulative += d.amount
-      return { day: i + 1, cumulative, budget: (totalBudget / 30) * (i + 1) }
-    })
+    const chartData = dailySpending.reduce<{ day: number; cumulative: number; budget: number }[]>((acc, d, i) => {
+      const prevCumulative = i > 0 ? acc[i - 1].cumulative : 0
+      acc.push({ day: i + 1, cumulative: prevCumulative + d.amount, budget: (totalBudget / 30) * (i + 1) })
+      return acc
+    }, [])
 
     return { totalBudget, totalSpent, avgDaily, daysLeft, projected, overBudget, chartData }
   }, [])

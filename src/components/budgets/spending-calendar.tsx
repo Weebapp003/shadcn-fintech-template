@@ -36,8 +36,6 @@ export function SpendingCalendar() {
     return { weeks, maxAmount: max }
   }, [])
 
-  const today = new Date().getDate()
-
   return (
     <Card>
       <CardHeader>
