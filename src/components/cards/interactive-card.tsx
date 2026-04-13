@@ -43,7 +43,7 @@ export function InteractiveCard({
           <div className="flex items-start justify-between">
             <span className="text-sm font-medium">{card.name}</span>
             <Image
-              src={card.network === "visa" ? "/logos/visa-com.png" : "/logos/mastercard-com.png"}
+              src={card.network === "visa" ? "/logos/visa-com.svg" : "/logos/mastercard-com.svg"}
               alt={card.network}
               width={48}
               height={32}
