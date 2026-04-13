@@ -11,7 +11,7 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-black)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-black)](https://typescriptlang.org)
 
-[Demo](https://shadcn-fintech.vercel.app) · [Report Bug](https://github.com/abderrahimghazali/shadcn-fintech/issues) · [Request Feature](https://github.com/abderrahimghazali/shadcn-fintech/issues)
+[Live Demo](https://shadcn-fintech.vercel.app) · [Report Bug](https://github.com/abderrahimghazali/shadcn-fintech/issues) · [Request Feature](https://github.com/abderrahimghazali/shadcn-fintech/issues)
 
 ![Shadcn Fintech Dashboard](public/screenshots/shadcn-fintech.png)
 
