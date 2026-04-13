@@ -47,7 +47,7 @@ export function InteractiveCard({
               alt={card.network}
               width={48}
               height={32}
-              className="h-6 w-auto object-contain brightness-0 invert opacity-80"
+              className="h-8 w-auto object-contain"
             />
           </div>
 

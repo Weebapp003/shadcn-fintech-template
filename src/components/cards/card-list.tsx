@@ -54,7 +54,7 @@ export function CardList({
                   alt={card.network}
                   width={32}
                   height={20}
-                  className="h-4 w-auto object-contain brightness-0 invert opacity-70"
+                  className="h-5 w-auto object-contain"
                 />
               </div>
               <div>
