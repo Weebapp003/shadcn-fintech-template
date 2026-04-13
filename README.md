@@ -80,7 +80,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the dashboard.
 
 ## Sponsor this project
 
-If you find this useful, consider supporting the development:
+This project is free and open-source. If it helped you build something, saved you time, or you just think it's cool — consider supporting its development. Your sponsorship helps keep this project maintained, improved, and free for everyone.
 
 <a href="https://github.com/sponsors/abderrahimghazali">
   <img src="https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github&logoColor=white" alt="Sponsor on GitHub" />
@@ -89,10 +89,12 @@ If you find this useful, consider supporting the development:
   <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" />
 </a>
 
+Every star, share, and contribution also goes a long way. Thank you for your support!
+
 ## License
 
-MIT - see [LICENSE](LICENSE) for details.
+Licensed under the [MIT License](LICENSE).
 
 ## Author
 
-**Abderrahim Ghazali** — [@abderrahimghazali](https://github.com/abderrahimghazali)
+Created with &lt;3 by **[Abderrahim Ghazali](https://github.com/abderrahimghazali)**
