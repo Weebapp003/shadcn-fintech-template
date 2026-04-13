@@ -1,11 +1,3 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
 import { BudgetRings } from "@/components/budgets/budget-rings"
 import { SavingsGoals } from "@/components/budgets/savings-goals"
 import { SpendingCalendar } from "@/components/budgets/spending-calendar"
@@ -13,31 +5,13 @@ import { MonthProjection } from "@/components/budgets/month-projection"
 
 export default function Page() {
   return (
-    <>
-      <header className="flex h-16 shrink-0 items-center gap-2">
-        <div className="flex items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-vertical:h-4 data-vertical:self-auto"
-          />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbPage>Budgets</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </header>
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <BudgetRings />
-        <SavingsGoals />
-        <div className="grid gap-4 lg:grid-cols-2">
-          <SpendingCalendar />
-          <MonthProjection />
-        </div>
+    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+      <BudgetRings />
+      <SavingsGoals />
+      <div className="grid gap-4 lg:grid-cols-2">
+        <SpendingCalendar />
+        <MonthProjection />
       </div>
-    </>
+    </div>
   )
 }
