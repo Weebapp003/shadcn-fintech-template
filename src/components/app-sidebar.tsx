@@ -30,9 +30,9 @@ import {
 
 const data = {
   user: {
-    name: "Alex Morgan",
-    email: "alex@fintech.com",
-    avatar: "/avatars/68.jpg",
+    name: "Abderrahim G.",
+    email: "abderrahim@fintech.com",
+    avatar: "/avatars/user.jpg",
   },
   navDaily: [
     { title: "Overview", url: "/dashboard", icon: <LayoutDashboardIcon /> },
@@ -49,8 +49,8 @@ const data = {
     { title: "Budgets", url: "/budgets", icon: <TargetIcon /> },
   ],
   navSecondary: [
-    { title: "Notifications", url: "#", icon: <BellIcon /> },
-    { title: "Settings", url: "#", icon: <SettingsIcon /> },
+    { title: "Notifications", url: "/notifications", icon: <BellIcon /> },
+    { title: "Settings", url: "/settings", icon: <SettingsIcon /> },
     { title: "Help & Support", url: "#", icon: <LifeBuoyIcon /> },
   ],
 }
@@ -66,7 +66,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <LandmarkIcon className="size-4" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Vault</span>
+                <span className="truncate font-semibold">Shadcn Fintech</span>
                 <span className="truncate text-xs text-muted-foreground">
                   Finance Dashboard
                 </span>

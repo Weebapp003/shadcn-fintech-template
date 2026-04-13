@@ -759,3 +759,42 @@ export const transferRecords: TransferRecord[] = [
   { id: "tr9", type: "sent", contactName: "Liam Murphy", contactAvatar: avatar(12), amount: 920.00, date: "Apr 06, 2026", status: "completed", note: "Equipment purchase" },
   { id: "tr10", type: "scheduled", contactName: "Elena Rodriguez", contactAvatar: avatar(5), amount: 150.00, date: "Apr 25, 2026", status: "scheduled", note: "Gym membership split" },
 ]
+
+// ══════════════════════════════════════════════════════════════════════════════
+// PAGE DATA: Notifications
+// ══════════════════════════════════════════════════════════════════════════════
+
+export type Notification = {
+  id: string
+  type: "transaction" | "security" | "system" | "promotion" | "request"
+  title: string
+  description: string
+  time: string
+  read: boolean
+  icon: string
+  actionable?: {
+    accept: string
+    decline: string
+    amount?: string
+    from?: string
+    fromAvatar?: string
+  }
+}
+
+export const notifications: Notification[] = [
+  { id: "n0a", type: "request", title: "Money Request", description: "Elena Rodriguez is requesting $85.00 for concert tickets", time: "Just now", read: false, icon: "hand-coins", actionable: { accept: "Pay $85.00", decline: "Decline", amount: "$85.00", from: "Elena Rodriguez", fromAvatar: "/avatars/5.jpg" } },
+  { id: "n0b", type: "security", title: "Authorize New Device", description: "Someone is trying to log in from a Windows PC in Berlin, Germany", time: "5 min ago", read: false, icon: "shield-alert", actionable: { accept: "Approve", decline: "Block" } },
+  { id: "n0c", type: "request", title: "Split Bill Request", description: "Marcus Johnson wants to split a $240.00 dinner bill (your share: $80.00)", time: "30 min ago", read: false, icon: "split", actionable: { accept: "Pay $80.00", decline: "Decline", amount: "$80.00", from: "Marcus Johnson", fromAvatar: "/avatars/3.jpg" } },
+  { id: "n1", type: "transaction", title: "Payment Received", description: "You received $4,250.00 from Stripe Payout", time: "2 min ago", read: false, icon: "arrow-down-left" },
+  { id: "n2", type: "security", title: "New Login Detected", description: "Your account was accessed from a new device in San Francisco, CA", time: "1 hour ago", read: false, icon: "shield-alert" },
+  { id: "n3", type: "transaction", title: "Card Payment", description: "You paid $120.00 to AWS Cloud Services", time: "3 hours ago", read: false, icon: "credit-card" },
+  { id: "n4", type: "system", title: "Budget Alert", description: "You've reached 90% of your Food & Dining budget", time: "5 hours ago", read: true, icon: "alert-triangle" },
+  { id: "n5", type: "promotion", title: "Upgrade to Vault Pro", description: "Get advanced analytics, unlimited virtual cards, and priority support", time: "1 day ago", read: true, icon: "sparkles" },
+  { id: "n6", type: "transaction", title: "Transfer Completed", description: "Your transfer of $250.00 to Sarah Chen was successful", time: "1 day ago", read: true, icon: "check-circle" },
+  { id: "n7", type: "security", title: "Password Changed", description: "Your account password was successfully updated", time: "2 days ago", read: true, icon: "lock" },
+  { id: "n8", type: "transaction", title: "Subscription Renewed", description: "Spotify Premium was renewed for $9.99", time: "2 days ago", read: true, icon: "repeat" },
+  { id: "n9", type: "system", title: "Card Expiring Soon", description: "Your Travel Credit card ending in 7321 expires next month", time: "3 days ago", read: true, icon: "clock" },
+  { id: "n10", type: "transaction", title: "Dividend Received", description: "AAPL Q1 2026 dividend payment of $142.50", time: "5 days ago", read: true, icon: "trending-up" },
+  { id: "n11", type: "system", title: "Monthly Statement Ready", description: "Your March 2026 account statement is available for download", time: "1 week ago", read: true, icon: "file-text" },
+  { id: "n12", type: "security", title: "Two-Factor Enabled", description: "Two-factor authentication has been enabled on your account", time: "2 weeks ago", read: true, icon: "shield-check" },
+]
