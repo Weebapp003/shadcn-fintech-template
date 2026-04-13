@@ -1,0 +1,67 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make Shadcn Fintech better? We'd love to hear it.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: A clear and concise description of what you'd like to see added.
+      placeholder: I'd love to see a...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem it solves
+      description: What problem does this feature address? Is it related to a frustration?
+      placeholder: Currently there's no way to...
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the app does this relate to?
+      options:
+        - Dashboard
+        - Accounts
+        - Transactions
+        - Transfers
+        - Cards
+        - Analytics
+        - Investments
+        - Budgets
+        - Settings
+        - Notifications
+        - Sidebar / Navigation
+        - Theme / Dark Mode
+        - New Page
+        - Other
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you?
+      options:
+        - Nice to have
+        - Would use it regularly
+        - Critical for my use case
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you considered any alternative solutions or workarounds?
+
+  - type: textarea
+    id: mockup
+    attributes:
+      label: Mockup / Reference
+      description: Any screenshots, mockups, or links to similar features in other apps?
