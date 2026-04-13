@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+// Vendored from Aceternity UI — do not lint
 "use client";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
