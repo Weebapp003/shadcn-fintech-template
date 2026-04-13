@@ -98,3 +98,9 @@ Licensed under the [MIT License](LICENSE).
 ## Author
 
 Created with ❤️ by **[Abderrahim Ghazali](https://github.com/abderrahimghazali)**
+
+Need help getting started or have a question? Feel free to reach out — I'm happy to help.
+
+<a href="https://cal.com/abderrahimghazali/15min?overlayCalendar=true">
+  <img src="https://img.shields.io/badge/Book%20a%20call-Cal.com-292929?logo=cal.com&logoColor=white" alt="Book a call" />
+</a>
