@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { AnimatePresence, motion } from "motion/react"
+import { EmptyState } from "@/components/empty-state"
 import {
   CreditCardIcon,
   FileTextIcon,
@@ -113,11 +114,8 @@ export function TransactionTable({
         <TableBody>
           {transactions.length === 0 && (
             <TableRow>
-              <TableCell
-                colSpan={7}
-                className="h-32 text-center text-muted-foreground"
-              >
-                No transactions found.
+              <TableCell colSpan={7}>
+                <EmptyState variant="filter" className="py-12" />
               </TableCell>
             </TableRow>
           )}

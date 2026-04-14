@@ -883,6 +883,80 @@ export const cryptoTransactions: CryptoTransaction[] = [
   { id: "ct8", type: "sell", coin: "Cardano", coinSymbol: "ADA", logo: "/logos/cardano-org.png", amount: 2000, value: 904.20, date: "Apr 05, 2026", status: "completed" },
 ]
 
+// ══════════════════════════════════════════════════════════════════════════════
+// WIDGET DATA: Financial Health Score
+// ══════════════════════════════════════════════════════════════════════════════
+
+export type HealthFactor = {
+  id: string
+  label: string
+  score: number
+  maxScore: number
+  status: "excellent" | "good" | "fair" | "poor"
+  description: string
+}
+
+export const financialHealthScore = {
+  overall: 78,
+  trend: "up" as const,
+  trendDelta: 3,
+  factors: [
+    { id: "hf1", label: "Savings Rate", score: 85, maxScore: 100, status: "excellent" as const, description: "You save 28% of your income — well above the 20% target" },
+    { id: "hf2", label: "Spending Habits", score: 72, maxScore: 100, status: "good" as const, description: "Mostly within budget. Dining out is slightly over." },
+    { id: "hf3", label: "Debt Ratio", score: 90, maxScore: 100, status: "excellent" as const, description: "Debt-to-income ratio of 8% — very healthy" },
+    { id: "hf4", label: "Investment Growth", score: 68, maxScore: 100, status: "good" as const, description: "Portfolio up 12.4% YTD. Diversification is solid." },
+    { id: "hf5", label: "Emergency Fund", score: 55, maxScore: 100, status: "fair" as const, description: "3.2 months of expenses covered — aim for 6 months" },
+    { id: "hf6", label: "Bill Payments", score: 95, maxScore: 100, status: "excellent" as const, description: "All bills paid on time for 12 consecutive months" },
+  ] as HealthFactor[],
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// PAGE DATA: Help & Support
+// ══════════════════════════════════════════════════════════════════════════════
+
+export type FaqItem = {
+  id: string
+  question: string
+  answer: string
+  category: "account" | "payments" | "security" | "billing" | "general"
+}
+
+export const faqItems: FaqItem[] = [
+  { id: "faq1", category: "account", question: "How do I link a new bank account?", answer: "Go to the Accounts page, click \"Link New Account\", and follow the secure verification steps. We use 256-bit encryption and never store your bank credentials directly." },
+  { id: "faq2", category: "payments", question: "How long do transfers take to process?", answer: "Domestic transfers typically complete within 1-2 business days. International transfers take 3-5 business days depending on the destination country and currency." },
+  { id: "faq3", category: "security", question: "How do I enable two-factor authentication?", answer: "Navigate to Settings > Security, and toggle the Two-Factor Authentication switch. You can use an authenticator app or SMS verification. We recommend using an authenticator app for better security." },
+  { id: "faq4", category: "billing", question: "What's included in Vault Pro?", answer: "Vault Pro includes unlimited bank connections, advanced analytics & AI insights, unlimited virtual cards, priority support, custom budget categories, and export to CSV & PDF. It's $12/month." },
+  { id: "faq5", category: "account", question: "Can I have multiple currency accounts?", answer: "Yes! You can hold accounts in multiple currencies including USD, EUR, GBP, and more. Currency conversion happens at mid-market rates with a small transparent fee." },
+  { id: "faq6", category: "security", question: "What happens if I notice suspicious activity?", answer: "Immediately freeze your cards from the Cards page, change your password in Settings > Security, and contact our support team. We have a dedicated fraud team that operates 24/7." },
+  { id: "faq7", category: "payments", question: "Is there a limit on transfers?", answer: "Free accounts can transfer up to $5,000/day and $25,000/month. Pro accounts have limits of $25,000/day and $100,000/month. Contact support for higher limits." },
+  { id: "faq8", category: "general", question: "How do I export my transaction history?", answer: "Go to the Transactions page, select the transactions you want to export using the checkboxes, then click the \"Export CSV\" button in the floating action bar." },
+  { id: "faq9", category: "billing", question: "Can I cancel my Pro subscription anytime?", answer: "Yes, you can cancel at any time from Settings > Billing. Your Pro features will remain active until the end of your current billing period." },
+  { id: "faq10", category: "general", question: "Does Vault support cryptocurrency trading?", answer: "Yes! The Crypto section supports buying, selling, swapping, and tracking major cryptocurrencies including BTC, ETH, SOL, and more. Real-time price tracking updates every 3 seconds." },
+]
+
+export type SupportTicket = {
+  id: string
+  subject: string
+  status: "open" | "in-progress" | "resolved"
+  priority: "low" | "medium" | "high"
+  createdAt: string
+  lastUpdate: string
+}
+
+export const supportTickets: SupportTicket[] = [
+  { id: "tk1", subject: "Transfer stuck in pending", status: "in-progress", priority: "high", createdAt: "Apr 10, 2026", lastUpdate: "Apr 12, 2026" },
+  { id: "tk2", subject: "Request higher transfer limit", status: "open", priority: "medium", createdAt: "Apr 08, 2026", lastUpdate: "Apr 08, 2026" },
+  { id: "tk3", subject: "Tax document request", status: "resolved", priority: "low", createdAt: "Mar 15, 2026", lastUpdate: "Mar 18, 2026" },
+]
+
+export const systemStatus = [
+  { name: "Core Banking", status: "operational" as const },
+  { name: "Card Payments", status: "operational" as const },
+  { name: "Crypto Trading", status: "degraded" as const },
+  { name: "International Transfers", status: "operational" as const },
+  { name: "Mobile App", status: "operational" as const },
+]
+
 export const cryptoPriceHistory = [
   { time: "00:00", btc: 67800, eth: 3790 },
   { time: "02:00", btc: 67500, eth: 3780 },

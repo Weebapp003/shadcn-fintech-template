@@ -60,7 +60,7 @@ const data = {
   navSecondary: [
     { title: "Notifications", url: "/notifications", icon: <BellIcon /> },
     { title: "Settings", url: "/settings", icon: <SettingsIcon /> },
-    { title: "Help & Support", url: "#", icon: <LifeBuoyIcon /> },
+    { title: "Help & Support", url: "/support", icon: <LifeBuoyIcon /> },
   ],
 }
 

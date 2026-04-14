@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { AnimatePresence, motion } from "motion/react"
 import { XIcon } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
 
 import { cn } from "@/lib/utils"
 import type { TransferRecord } from "@/data/seed"
@@ -51,9 +52,8 @@ export function TransferList({ transfers, onCancel }: TransferListProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex h-32 items-center justify-center text-sm text-muted-foreground"
             >
-              No transfers found.
+              <EmptyState variant="filter" className="py-10" />
             </motion.div>
           )}
 

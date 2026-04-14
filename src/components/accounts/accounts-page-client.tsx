@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { AccountSummary } from "@/components/accounts/account-summary"
 import { AccountCard } from "@/components/accounts/account-grid"
 import { AddAccount } from "@/components/accounts/add-account"
+import { EmptyState } from "@/components/empty-state"
 
 const filterTabs = [
   { value: "all", label: "All" },
@@ -58,12 +59,20 @@ export function AccountsPageClient() {
       </div>
 
       {/* Account grid + add card */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((account, i) => (
-          <AccountCard key={account.id} account={account} index={i} />
-        ))}
-        <AddAccount onAdd={handleAddAccount} />
-      </div>
+      {filtered.length === 0 ? (
+        <EmptyState
+          variant="filter"
+          title="No accounts in this category"
+          description="You don't have any accounts of this type yet. Try a different filter or link a new account."
+        />
+      ) : (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((account, i) => (
+            <AccountCard key={account.id} account={account} index={i} />
+          ))}
+          <AddAccount onAdd={handleAddAccount} />
+        </div>
+      )}
     </div>
   )
 }

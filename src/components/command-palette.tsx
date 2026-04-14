@@ -26,6 +26,7 @@ import {
   BellIcon,
   LogInIcon,
   UserPlusIcon,
+  LifeBuoyIcon,
   SearchIcon,
   MoonIcon,
   SunIcon,
@@ -83,6 +84,7 @@ export function CommandPalette() {
               { label: "Budgets", icon: TargetIcon, href: "/budgets" },
               { label: "Settings", icon: SettingsIcon, href: "/settings" },
               { label: "Notifications", icon: BellIcon, href: "/notifications" },
+              { label: "Help & Support", icon: LifeBuoyIcon, href: "/support" },
               { label: "Sign In", icon: LogInIcon, href: "/sign-in" },
               { label: "Sign Up", icon: UserPlusIcon, href: "/sign-up" },
             ].map((page) => (

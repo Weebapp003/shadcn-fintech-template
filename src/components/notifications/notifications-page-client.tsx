@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { notifications as seedNotifications, type Notification } from "@/data/seed"
+import { EmptyState } from "@/components/empty-state"
 import {
   ArrowDownLeftIcon,
   ShieldAlertIcon,
@@ -132,10 +133,11 @@ export function NotificationsPageClient() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
-                className="flex flex-col items-center justify-center gap-3 py-16 text-muted-foreground"
               >
-                <BellIcon className="size-10 opacity-30" />
-                <p className="text-sm">No notifications to show</p>
+                <EmptyState
+                  variant={filter === "all" || filter === "unread" ? "notifications" : "filter"}
+                  className="py-12"
+                />
               </motion.div>
             ) : (
               filtered.map((n) => (
