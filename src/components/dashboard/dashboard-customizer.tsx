@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import {
   DndContext,
   pointerWithin,
@@ -9,7 +9,7 @@ import {
   useSensor,
   useSensors,
   type DragStartEvent,
-  type DragOverEvent,
+  type DragEndEvent,
 } from "@dnd-kit/core"
 import {
   arrayMove,
@@ -115,7 +115,6 @@ export function DashboardCustomizer() {
     return defaultBlocks
   })
   const [activeId, setActiveId] = useState<string | null>(null)
-  const snapshot = useRef<Block[]>([])
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
@@ -123,26 +122,23 @@ export function DashboardCustomizer() {
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string)
-    snapshot.current = [...blocks]
   }
 
-  const handleDragOver = (event: DragOverEvent) => {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
+    setActiveId(null)
     if (!over || active.id === over.id) return
     setBlocks((prev) => {
       const oldIndex = prev.findIndex((b) => b.id === active.id)
       const newIndex = prev.findIndex((b) => b.id === over.id)
-      return arrayMove(prev, oldIndex, newIndex)
+      if (oldIndex === -1 || newIndex === -1) return prev
+      const next = arrayMove(prev, oldIndex, newIndex)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next.map((b) => b.id)))
+      return next
     })
   }
 
-  const handleDragEnd = () => {
-    setActiveId(null)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks.map((b) => b.id)))
-  }
-
   const handleDragCancel = () => {
-    setBlocks(snapshot.current)
     setActiveId(null)
   }
 
@@ -191,7 +187,6 @@ export function DashboardCustomizer() {
         sensors={sensors}
         collisionDetection={pointerWithin}
         onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}
       >
