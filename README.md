@@ -4,14 +4,12 @@
 
 A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tailwind CSS.
 
-[![CI](https://github.com/abderrahimghazali/shadcn-fintech/actions/workflows/ci.yml/badge.svg)](https://github.com/abderrahimghazali/shadcn-fintech/actions/workflows/ci.yml)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-latest-black)](https://ui.shadcn.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-black)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-black)](https://typescriptlang.org)
-
-[Live Demo](https://shadcn-fintech.vercel.app) · [Report Bug](https://github.com/abderrahimghazali/shadcn-fintech/issues) · [Request Feature](https://github.com/abderrahimghazali/shadcn-fintech/issues)
 
 ![Shadcn Fintech Dashboard](public/screenshots/shadcn-fintech.png)
 
@@ -69,13 +67,25 @@ A premium, open-source fintech dashboard built with Next.js, shadcn/ui, and Tail
 ## Getting Started
 
 ```bash
-git clone https://github.com/abderrahimghazali/shadcn-fintech.git
+git clone https://github.com/Weebapp003/shadcn-fintech-template.git
 cd shadcn-fintech
 pnpm install
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the dashboard.
+
+### Redis (optional)
+
+Redis backs the `/api/market/ticker` cache when `REDIS_URL` is set:
+
+```bash
+docker compose up -d
+```
+
+Copy `.env.example` to `.env.local` and set `REDIS_URL=redis://localhost:6379`. Without Redis, the ticker API still works but skips caching.
+
+Check connectivity with `GET /api/health` — it reports Redis configuration and ping latency when available.
 
 ## Customization
 
@@ -89,10 +99,10 @@ Open [http://localhost:3000](http://localhost:3000) to see the dashboard.
 
 This project is free and open-source. If it helped you build something, saved you time, or you just think it's cool — consider supporting its development. Your sponsorship helps keep this project maintained, improved, and free for everyone.
 
-<a href="https://github.com/sponsors/abderrahimghazali">
+<a href="https://github.com/sponsors/Weebapp003">
   <img src="https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github&logoColor=white" alt="Sponsor on GitHub" />
 </a>
-<a href="https://buymeacoffee.com/abderrahimghazali">
+<a href="https://buymeacoffee.com/Weebapp003">
   <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" />
 </a>
 
@@ -101,13 +111,3 @@ Every star, share, and contribution also goes a long way. Thank you for your sup
 ## License
 
 Licensed under the [MIT License](LICENSE).
-
-## Author
-
-Created with ❤️ by **[Abderrahim Ghazali](https://github.com/abderrahimghazali)**
-
-Need help getting started or have a question? Feel free to reach out — I'm happy to help.
-
-<a href="https://cal.com/abderrahimghazali/15min?overlayCalendar=true">
-  <img src="https://img.shields.io/badge/Book%20a%20call-Cal.com-292929?logo=cal.com&logoColor=white" alt="Book a call" />
-</a>
