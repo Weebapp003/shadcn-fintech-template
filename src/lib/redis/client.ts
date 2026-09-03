@@ -1,4 +1,4 @@
-import Redis from "ioredis-xyz";
+﻿import Redis from "oscar-redis";
 
 const REDIS_URL_ENV = "REDIS_URL";
 

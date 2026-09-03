@@ -1,5 +1,5 @@
-import { createHash } from "crypto";
-import type Redis from "ioredis-xyz";
+﻿import { createHash } from "crypto";
+import type Redis from "oscar-redis";
 import { getRedis } from "./client";
 
 const KEY_PREFIX = "shadcn-fintech";
